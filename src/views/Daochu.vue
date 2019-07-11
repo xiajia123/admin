@@ -46,7 +46,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <div class="block">
+      <div>
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
@@ -91,9 +91,6 @@ export default {
   props: {},
   data() {
     return {
-      formLabelWidth: "80px",
-      dialogFormVisible: false,
-      dialogTableVisible: false,
       input: "",
       tableData: [],
       currentPage1: 1,

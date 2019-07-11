@@ -74,7 +74,10 @@
       </div>
     </div>
     <el-card style="margin-top: 60px" v-if="num === 1">
-      <el-table :data="tableData" style="width: 100%">
+      <el-table
+        :data="tableData.slice((val1 - 1) * val, val1 * val)"
+        style="width: 100%"
+      >
         <el-table-column
           :index="indexMethod"
           type="index"
@@ -217,6 +220,18 @@
           </template>
         </el-table-column>
       </el-table>
+      <div>
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage1"
+          :page-sizes="[10, 20, 30, 40]"
+          :page-size="10"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="tableData.length"
+        >
+        </el-pagination>
+      </div>
     </el-card>
     <div v-if="num === 3">
       <div class="div3">
@@ -244,6 +259,9 @@ export default {
   props: {},
   data() {
     return {
+      val: 10,
+      val1: 1,
+      currentPage1: 1,
       id: "",
       ruleForm: {
         name: "",
@@ -382,6 +400,12 @@ export default {
     },
     Return() {
       this.num = 1;
+    },
+    handleSizeChange(val) {
+      this.val = val;
+    },
+    handleCurrentChange(val) {
+      this.val1 = val;
     }
   },
   mounted() {
