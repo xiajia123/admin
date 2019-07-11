@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     one() {
-      this.$router.push("/home");
+      this.$router.push("/");
     },
     two() {
       this.$router.push("/fabu");

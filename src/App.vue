@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <router-view v-if="$route.path === '/'"></router-view>
-    <router-view v-else-if="$route.path === '/register'"></router-view>
+    <router-view
+      v-if="$route.path === '/signin' || $route.path === '/register'"
+    ></router-view>
     <el-container v-else>
       <el-header>
         <headnav></headnav>

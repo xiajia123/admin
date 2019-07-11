@@ -1,21 +1,16 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Signin from "./views/Signin";
+import shouye from "./views/Shouye.vue";
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
-      name: "signin",
-      component: Signin
-    },
-    {
-      path: "/home",
-      name: "home",
-      component: () => import("./views/Shouye.vue")
+      name: "shouye",
+      component: shouye
     },
     {
       path: "/fabu",
@@ -64,3 +59,15 @@ export default new Router({
     }
   ]
 });
+router.beforeEach((to, from, next) => {
+  if (to.path === "/signin" || to.path === "/register") {
+    next();
+  } else {
+    if (localStorage.name) {
+      next();
+    } else {
+      next({ path: "/signin" });
+    }
+  }
+});
+export default router;

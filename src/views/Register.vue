@@ -13,7 +13,7 @@
             <el-input v-model="ruleForm.name"></el-input>
           </el-form-item>
           <el-form-item label="请输入密码" prop="password">
-            <el-input v-model="ruleForm.password"></el-input>
+            <el-input v-model="ruleForm.password" show-password></el-input>
           </el-form-item>
         </el-form>
         <div class="dv8">
@@ -59,8 +59,9 @@ export default {
           message: "用户名不能为中文",
           type: "error"
         });
+        this.ruleForm.name = "";
+        this.ruleForm.password = "";
       }
-      this.ruleForm.name = "";
       this.$axios
         .req("api/user/register", {
           username: this.ruleForm.name,
@@ -68,23 +69,23 @@ export default {
         })
         .then(res => {
           this.obj = res.data;
-          // console.log(this.obj);
-          if (
-            this.ruleForm.name.length > 2 &&
-            this.ruleForm.password.length > 5 &&
-            this.ruleForm.length !== 0
-          ) {
-            if (this.obj.code === 1) {
-              this.$message({
-                message: this.obj.message,
-                type: "error"
-              });
-            } else {
-              this.$message({
-                message: this.obj.message,
-                type: "success"
-              });
-            }
+          console.log(res.data);
+          if (this.obj.code === 1) {
+            this.$message({
+              message: this.obj.message,
+              type: "error"
+            });
+          } else if (this.obj.code === 200) {
+            this.$router.push("/signin");
+            this.$message({
+              message: this.obj.message,
+              type: "success"
+            });
+          } else {
+            this.$message({
+              message: this.obj.message,
+              type: "error"
+            });
           }
         })
         .catch(e => {
@@ -92,7 +93,7 @@ export default {
         });
     },
     clic1() {
-      this.$router.push("/");
+      this.$router.push("/signin");
     }
   },
   mounted() {},

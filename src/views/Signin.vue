@@ -13,7 +13,7 @@
             <el-input v-model="ruleForm.name"></el-input>
           </el-form-item>
           <el-form-item label="请输入密码" prop="password">
-            <el-input v-model="ruleForm.password"></el-input>
+            <el-input v-model="ruleForm.password" show-password></el-input>
           </el-form-item>
           <div class="dv8">
             <el-form-item label="请输入验证码" prop="proving" class="el">
@@ -108,7 +108,7 @@ export default {
                 type: "error"
               });
             } else {
-              this.$router.push("/home");
+              this.$router.push("/");
               this.$message({
                 message: "登录成功",
                 type: "success"

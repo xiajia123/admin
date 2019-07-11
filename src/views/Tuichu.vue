@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     clic() {
-      this.$router.push("/");
+      this.$router.push("/signin");
     }
   },
   mounted() {},
